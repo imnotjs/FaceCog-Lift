@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Login</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content -->
+    <div id="main">
+        <h1>Face Login</h1>
+        <div id="video-container">
+            <video id="video" autoplay></video>
+            <button id="scanButton">Scan Face</button>
+        </div>
+        <div id="result"></div>
+        <div id="debug" style="color: red;"></div>
+    </div>
+
+    <script>
+        // Dynamically load the sidebar
+        fetch('/sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+
+                // Ensure correct display for logged-out users
+                document.getElementById('logged-out-links').style.display = 'block';
+                document.getElementById('logged-in-links').style.display = 'none';
+            });
+
+        const video = document.getElementById("video");
+        const scanButton = document.getElementById("scanButton");
+        const videoContainer = document.getElementById("video-container");
+        const resultDiv = document.getElementById("result");
+        const debugDiv = document.getElementById("debug");
+
+        let attempts = 0; // Track failed attempts
+        const MAX_ATTEMPTS = 3;
+
+        // Request camera access
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then((stream) => {
+                video.srcObject = stream;
+            })
+            .catch((error) => {
+                debugDiv.textContent = `Camera Error: ${error.message}`;
+            });
+
+        // Handle scan button clicks
+        scanButton.addEventListener("click", () => {
+            if (attempts >= MAX_ATTEMPTS) {
+                resultDiv.textContent = "Max attempts reached. Seek help.";
+                setTimeout(() => (window.location.href = "/index.html"), 5000);
+                return;
+            }
+
+            // Simulate face recognition
+            if (Math.random() > 0.5) {
+                alert("Face authenticated! Redirecting...");
+                window.location.href = "/profile.html";
+            } else {
+                attempts++;
+                resultDiv.textContent = `Failed attempt ${attempts}`;
+            }
+        });
+    </script>
+</body>
+</html>

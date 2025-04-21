@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Out</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content -->
+    <div id="main">
+        <h1>Log Out</h1>
+        <p>Are you sure you want to log out?</p>
+        <button class="red" onclick="logout()">Yes</button>
+        <button class="white" onclick="cancel()">No</button>
+    </div>
+
+    <script>
+        fetch('/sidebar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('sidebar-container').innerHTML = data;
+            });
+
+        function logout() {
+            alert("Logged out!");
+            window.location.href = '/index.html';
+        }
+
+        function cancel() {
+            window.location.href = '/profile.html';
+        }
+    </script>
+</body>
+</html>

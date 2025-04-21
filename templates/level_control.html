@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lift Control</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <!-- Sidebar placeholder -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content -->
+    <div id="main">
+        <h1>Lift Control</h1>
+        <p>Current level: <span id="current-level">{{ current_level }}</span></p>
+        <form id="change-level-form" method="POST" action="/change_level">
+            <label for="level">Change to level:</label>
+            <select name="level" id="level">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
+            <button type="submit">Change Level</button>
+        </form>
+    </div>
+
+    <script src="/static/js/sidebar.js"></script>
+</body>
+</html>

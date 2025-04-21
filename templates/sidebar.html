@@ -1,0 +1,12 @@
+<div class="sidebar">
+    <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        {% if not session.get('authenticated', False) %}
+            <li><a href="{{ url_for('face_login') }}">Login</a></li>
+        {% else %}
+            <li><a href="{{ url_for('profile') }}">Profile</a></li>
+            <li><a href="{{ url_for('level_control') }}">Level Control</a></li>
+            <li><a href="{{ url_for('face_logout') }}">Logout</a></li>
+        {% endif %}
+    </ul>
+</div>

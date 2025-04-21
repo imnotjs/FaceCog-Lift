@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <!-- Sidebar placeholder -->
+    <div id="sidebar-container"></div>
+
+    <!-- Main content -->
+    <div id="main">
+        <h1>Welcome, {{ user_name }}</h1>
+        <p>You are authorized for levels: {{ authorized_levels | join(', ') }}</p>
+        <a href="/level_control">Go to Lift Control</a>
+    </div>
+
+    <script src="/static/js/sidebar.js"></script>
+</body>
+</html>
